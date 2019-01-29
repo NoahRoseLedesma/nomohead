@@ -1,24 +1,17 @@
 #No-Mo-Head
 
-Here's a bit of background: I frequently use my Pi in headless mode, but I live in a college where the Wifi doesn't let you use static IPs. I've implemented a number of workarounds for this problem, but this is the one that stuck. If you can connect to the internet but have a problem connecting to the Pi, this could help.
+Here's a bit of background: I frequently use my Pi in headless mode, but I live in a college where the Wifi doesn't let you use static IPs. I've implemented a number of workarounds for this problem, but this is the one that stuck. If you can connect to a wireless network, but have no means to retrive the local ip address of your pi, this could help.
 
 ## Installation
 
 First clone the repository (if you have git on your Raspi. If not, just download):
 ```
-git clone https://github.com/hrishioa/nomohead.git
+git clone https://github.com/NoahRoseLedesma/nomohead.git
 ```
 
-**Don't** install yet! Install ngrok first in a directory of your choice:
+Checkout the local_ip branch
 ```
-wget https://dl.ngrok.com/ngrok_2.0.19_linux_arm.zip
-unzip ngrok.zip
-```
-(This was the linux release of ngrok when I wrote this. Do check for updates on [the website](https://ngrok.com/download))
-
-We are going to tunnel into the SSH port of the Raspi using ngrok. For this functionality, you need to [register with ngrok](https://ngrok.com/login) (if you haven't already), and authenticate yourself with the authtoken.
-```
-./ngrok authtoken <TOKEN HERE>
+git checkout local_ip
 ```
 
 Next, run the install script:
@@ -28,10 +21,8 @@ Next, run the install script:
 
 Setup asks for the following parameters:
 
-1. Location of ngrok - enter the directory where you installed ngrok along with ngrok executable (not just the directory)
-2. Dweet ID - This is the ID you will be using to broadcast the IP. Enter something you think is unique (i.e. not raspi)
-3. Dweet ID for tunnel - The first parameter is for the IP. You can use separate IDs for tunnel and IP if you want, if not just press ENTER.
-4. Delay - The ngrok service takes an unpredictable amount of time to initialize (depends on processor and network load), but 1m seems to work fine for me. Increase this value if the ip address shows up but the ngrok tunnel never does. (It is worth pointing out that this is a little redundant. You can simply login to your ngrok account to see open tunnels and connect to them)
+1. Dweet ID - This is the ID you will be using to broadcast the IP. Enter something you think is unique (i.e. not raspi)
+2. The name of the interface to forward the ipv4 address of
 
 Once all values are entered, a cron job is created that runs at boot.
 
